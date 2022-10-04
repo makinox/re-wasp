@@ -3,6 +3,7 @@ import React from 'react';
 import updateTask from '@wasp/actions/updateTask';
 import createTask from '@wasp/actions/createTask';
 import getTasks from '@wasp/queries/getTasks';
+import logout from '@wasp/auth/logout.js';
 import { useQuery } from '@wasp/queries';
 
 const MainPage = () => {
@@ -16,6 +17,7 @@ const MainPage = () => {
 
       {isFetching && 'Fetching...'}
       {error && 'Error: ' + error}
+      <button onClick={logout}> Logout </button>
     </div>
   );
 };
