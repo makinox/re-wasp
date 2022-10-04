@@ -13,3 +13,29 @@ entity Task {=psl
     description String
     isDone      Boolean @default(false)
 psl=}
+
+
+entity User {=psl
+    id          Int     @id @default(autoincrement())
+    username    String  @unique
+    password    String
+psl=}
+
+query getTasks {
+  // We specify that JS implementation of the query (which is an async JS function)
+  // can be found in `ext/queries.js` as named export `getTasks`.
+  fn: import { getTasks } from "@ext/queries.js",
+  // We tell Wasp that this query is doing something with entity `Task`. With that, Wasp will
+  // automatically refresh the results of this query when tasks change.
+  entities: [Task]
+}
+
+action createTask {
+  fn: import { createTask } from "@ext/actions.js",
+  entities: [Task]
+}
+
+action updateTask {
+  fn: import { updateTask } from "@ext/actions.js",
+  entities: [Task]
+}
